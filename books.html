@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Details</title>
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1616531770192-6eaea74c2456?ixlib=rb4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHdvcmtpbmclMj9tJTIwaG9tZXxlbfHwnwwwfHx8MA%3D%3D&w=1000&q=80');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            background-color: rgba(178, 210, 234, 0.8);
+            margin: 200px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        label, select {
+            display: block;
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            color: #3c023a;
+            font-weight: 500;
+        }
+
+        .form-container {
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #3c023a;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #5e0462;
+        }
+
+        p.book-description {
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <div class="form-container">
+            <h1>Kindly enter your details to select your book</h1>
+            <label for="roll_number">Roll Number:</label>
+            <input type="text" id="roll_number" name="roll_number" placeholder="Enter your roll number">
+
+            <label for="select_option">Select your branch:</label>
+            <select id="select_option" onchange="updateBookOptions()">
+                <option value="Select Branch">Select Branch</option>
+                <option value="AI&DS">AI&DS</option>
+                <option value="CSE">CSE</option>
+                <option value="ECE">ECE</option>
+                <option value="EEE">EEE</option>
+                <option value="CSM">CSM</option>
+                <option value="IT">IT</option>
+                <option value="CIVIL">CIVIL</option>
+                <option value="MECH">MECH</option>
+                <option value="MBA">MBA</option>
+            </select>
+
+            <div id="book-options" class="hidden">
+                <label for="book_option">Select a book:</label>
+                <select id="book_option"></select>
+                <p class="book-description" id="book_description"></p>
+                <button type="button" onclick="saveBookSelection()">Submit</button>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        const bookDescriptions = {
+            "AI&DS": {
+                "C Programming": "",
+                "Python Programming": "",
+                "Java Programming": ""
+            },
+            "CSE": {
+                "Operating System": "",
+                "Digital Logic and Designs": "",
+                "OOPS": ""
+            },
+            "ECE": {
+                "Electronics": "",
+                "Digital Designs": "",
+                "Logical Circuits": ""
+            },
+            "EEE": {
+                "Electronics Designs": "",
+                "Digital Designs": "",
+                "Logical Circuits": ""
+            },
+            "CSM": {
+                "Introduction to ML": "",
+                "ML using Python": "",
+                "Machine Learning Algorithms": ""
+            },
+            "IT": {
+                "C Basics": "",
+                "Cybersecurity": "",
+                "DBMS": ""
+            },
+            "CIVIL": {
+                "DMS": "",
+                "Introduction to Civil Engineering": "",
+                "DLD": ""
+            },
+            "MECH": {
+                "Introduction to Mechanics": "",
+                "Machine Designs": "",
+                "Motors Designs": ""
+            },
+            "MBA": {
+                "Introduction to Business": "",
+                "Stock Market": "",
+                "Business Analytics": ""
+            },
+        };
+
+        function updateBookOptions() {
+            const selectedBranch = document.getElementById("select_option").value;
+            const bookOption = document.getElementById("book_option");
+            bookOption.innerHTML = '<option>Select Book</option>';
+
+            if (selectedBranch in bookDescriptions) {
+                const books = bookDescriptions[selectedBranch];
+                for (const book in books) {
+                    const option = document.createElement("option");
+                    option.value = book;
+                    option.text = book;
+                    bookOption.appendChild(option);
+                }
+                document.getElementById("book-options").classList.remove("hidden");
+            } else {
+                document.getElementById("book-options").classList.add("hidden");
+                document.getElementById("book_description").textContent = "";
+            }
+        }
+
+        function saveBookSelection() {
+            const rollNumber = document.getElementById("roll_number").value;
+            const selectedBranch = document.getElementById("select_option").value;
+            const selectedBook = document.getElementById("book_option").value;
+
+            if (!rollNumber || selectedBranch === "Select Branch" || selectedBook === "Select Book") {
+                alert("Please fill in all the fields.");
+                return;
+            }
+
+            const data = {
+                roll_number: rollNumber,
+                selected_book: selectedBook,
+            };
+
+            fetch('/save-book-selection', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(result => {
+                alert(result.message);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error saving book selection. Please try again later.');
+            });
+        }
+
+        function displaySelectedBookDescription() {
+            const selectedBranch = document.getElementById("select_option").value;
+            const selectedBook = document.getElementById("book_option").value;
+            const bookDescription = document.getElementById("book_description");
+
+            if (selectedBranch in bookDescriptions && selectedBook in bookDescriptions[selectedBranch]) {
+                bookDescription.textContent = bookDescriptions[selectedBranch][selectedBook];
+            } else {
+                bookDescription.textContent = "Description not available for this book.";
+            }
+        }
+    </script>
+</body>
+</html>

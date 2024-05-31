@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Details</title>
+    <style>
+        .hero-section {
+            width: 100%;
+            height: 101%;
+            background-image: url('https://images.unsplash.com/photo-1616531770192-6eaea74c2456?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHdvcmtpbmclMjBmcm9tJTIwaG9tZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80');
+            background-size: cover;
+            display: inline-flex;
+            justify-content: right;
+            align-items: top;
+        }
+
+        .hero-section .sub-heading {
+            margin-top: 10px;
+            text-align: center;
+            color: #3c023a;
+            text-transform: capitalize;
+            font-size: 40px;
+            font-weight: 500;
+        }
+
+        th, td {
+            padding: 10px;
+        }
+
+        table {
+            background-color: #b2d2ea;
+            margin: 200px;
+        }
+
+        .radio-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-group label {
+            margin-right: 10px;
+        }
+
+        .radio-group input {
+            margin-right: 5px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<header class="hero-section">
+    <center>
+        <div class="content">
+            <h1 class="sub-heading">Kindly enter your roll number and select an option to update!!!</h1>
+        </div>
+    </center>
+    <br>
+    <form id="rollNumberForm" action="/update" method="post">
+        <table>
+            <tr>
+                <th><label>Roll number:</label></th>
+                <td>
+                    <input type="number" id="rollNumber" name="roll_number">
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2"><big>Select an option to update:</big></th>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <div class="radio-group">
+                        <input type="radio" id="nameOption" name="select_option" value="name"> Name
+                        <input type="radio" id="branchOption" name="select_option" value="branch"> Branch
+                        <input type="radio" id="yearOption" name="select_option" value="year"> Year
+                    </div>
+                </td>
+            </tr>
+            <tr id="nameInput" class="hidden">
+                <th><label>Name of the student:</label></th>
+                <td>
+                    <input type="text" name="name"> <!-- Use name attribute for name -->
+                </td>
+            </tr>
+            <tr id="branchInput" class="hidden">
+                <th><label>Branch:</label></th>
+                <td>
+                    <input type="text" name="branch">
+                </td>
+            </tr>
+            <tr id="yearInput" class="hidden">
+                <th><label>Year:</label></th>
+                <td>
+                    <input type="number" name="year">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <input type="submit" value="Submit">
+                </td>
+            </tr>
+        </table>
+    </form>
+</header>
+
+<script>
+    const rollNumberForm = document.getElementById("rollNumberForm");
+    const radioInputs = document.querySelectorAll('input[name="select_option"]');
+    const textInputRows = document.querySelectorAll('tr[id$="Input"]');
+
+    // Function to toggle visibility of input rows based on radio button selection
+    function toggleInputFields() {
+        textInputRows.forEach(row => {
+            row.classList.add("hidden");
+        });
+
+        const selectedInputRow = document.getElementById(this.value + "Input");
+        selectedInputRow.classList.remove("hidden");
+    }
+
+    radioInputs.forEach(input => {
+        input.addEventListener('change', toggleInputFields);
+    });
+
+    // Prevent form submission until a roll number is provided
+    rollNumberForm.addEventListener("submit", function (e) {
+        if (!document.getElementById("rollNumber").value) {
+            alert("Please enter a roll number.");
+            e.preventDefault();
+        }
+    });
+</script>
+</body>
+</html>

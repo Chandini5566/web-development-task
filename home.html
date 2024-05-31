@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Library home page</title>
+</head>
+<style>
+body { 
+
+    margin: 0;    
+    height:5000px;
+    background-color:green;
+ }
+section{
+
+}
+p{
+    font-family:Arial;
+    font-size:20px;
+    marin-bottom:10px;
+    color:rgb(255, 255, 255);
+}
+  *{
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+}
+.container{
+    width: 100%;
+    height: 600px;
+    background: linear-gradient( rgba(197, 55, 109, 0.688),rgba(0,0,0,0.5)),url(background.jpg);
+    background-size: cover;
+    background-position: center;
+    position:fixed;
+    margin-left:0px;
+    margin-top:-15px;
+}
+.navbar{
+    width: 85%;
+     margin:auto;
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+   
+
+
+ box-shadow:0 0 14px rgba(54, 65, 66, 0.3);
+}
+.logo{
+    color:rgb(255, 255, 255);
+    font-size: 30px;
+    font-family : Arial;
+    font-weight : bolder;
+    padding-left: 20px;
+    float: left;
+    padding-top: 10px;
+    margin-top:10px;
+    margin-right:10px;
+}
+
+.navbar ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+    margin-left:0px;
+    margin-right:10px;
+}
+
+.navbar ul li a{
+    text-decoration: none;
+    color:rgb(255, 255, 255);
+}
+
+.navbar ul li::after{
+    content: '';
+    height: 3px;
+    width: 0;
+    position: absolute;
+    left: 0;
+    background:#cbc6c6;
+    bottom: -10px;
+    transition: 0.6s;
+
+}
+
+.navbar ul li:hover::after{
+    position:fixed;
+    width: 100%;
+}
+
+.content{
+    width: 100%;
+    color:rgb(255, 255, 255);
+    position: absolute;
+    top: 26%;
+    transform: translateY(-50%);
+    text-align: center;
+   
+
+ position:fixed;
+    margin-top:-15px;
+    margin-left:20px;
+
+}
+
+.container h1{
+    font-size: 40px;
+    margin-top:10px;
+    padding-top:5px;
+    margin-bottom:10px;
+    text-align:center;
+    margin-left:185px;
+    color:rgb(255, 255, 255);
+    margin-left: 185px;
+
+}
+
+.content p{
+    margin-top: -15px auto;
+    line-height: 25px;
+}
+.button {
+      display: inline-block;
+      padding-top:15px;
+      background-color: #dc668f;
+      color: white;
+      text-decoration: none;
+      border-radius:28px;
+      width:200px;
+      height:31px;
+      cursor: pointer;
+      justify-content:center;
+      position:relative;
+      vertical-align:top;
+      padding-bottom:10px;
+      margin-right:20px;
+      
+    }
+.mabutton
+{
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #dc668f;
+      color: white;
+      text-decoration: none;
+      border-radius:28px;
+      width:200px;
+      height:31px;
+     padding-top:15px;
+     padding-bottom:10px;
+   
+
+
+   cursor: pointer;
+      vertical-align:top;
+
+}
+.frm{
+    margin-top:200px;
+    height:82%;
+    width:1528px;
+    border:none;
+    background-color:#dc668f;
+    margin-right:-15px;
+
+ }
+ section a{
+    padding:12px 30px;
+    border-radius: 4px;
+    outline: none;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+ section .btnone{
+    background: #fff;
+    color: #000;
+
+}
+section .btntwo{
+    background: #4d0e32;
+    color: white;
+}
+
+</style>
+<body>
+
+    <div class="container">
+        <div class="navbar">
+            
+            <h1><h1 style="text-align:center;" ,"background color=pink;">WELCOME TO LBRCE LIBRARY</h1><br>
+            
+            <ul>
+                <li><a href="about.html">About Library</a></li>
+                <li><a href="timings.html">Library Timings</a></li>
+                
+            </ul>
+        </div>
+        <div class="content">
+            <p>There is no friend as loyal as a book !!!... <br><br> Login to Enter
+            </p><br>
+            <section>
+            
+
+<div>
+    <a href="login.html" target="_self" class="btntwo">Log In</a>
+    <a href="logout.html" target="_self" class="btntwo">Log Out</a>
+    <a href="logindetails.html" target="_self" class="btntwo">Login Details</a>
+  <a href="update.html" target="_self" class="btntwo">Update Details</a>
+<a href="search.html" target="_self" class="btntwo">Search Details</a>
+<a href="books.html" target="_self" class="btntwo">Select your book</a>
+</div>
+
+        </section>
+        </div>
+      <div class="frm">
+            <marquee behavior="scroll" direction="left" scrollamount="20">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/NYC_-_New_York_City_Library_-_1723.jpg" alt="Your Image" width="2000" height="900">
+        <img src="https://www.eui.eu/Content-Types-Assets/Web-Unit/Student-in-law-library-section.x7622d211.jpg?w=1920&h=1080" alt="Your Image" width="2000" height="900">
+
+        </div>
+</body>
+</html>
